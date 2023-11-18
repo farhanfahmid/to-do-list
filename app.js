@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))
 
 var items = [];
+var workItems = [];
 
 app.get("/", (req, res) => {
    
@@ -25,12 +26,10 @@ app.get("/", (req, res) => {
     }
 
     var day = today.toLocaleDateString("en-US", options)
-
-    
+ 
     res.render('list', {
-        day: day,
+        listTitle: day,
         items: items,
-        
     })
 
 })
@@ -38,31 +37,37 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
     var item = req.body.addItem;
 
-    items.push(item)
 
-    console.log(item)
+    if(req.body.list==="Work"){ //look at the button in list.ejs
+        workItems.push(item);
+        res.redirect("/work")
+    }
+    else{
+        items.push(item)
+        res.redirect("/")
+    }
 
-    res.redirect("/")
+    
 })
 
+app.get("/work", (req, res) => {
 
+    res.render('list', {
+        listTitle: "Work List",
+        items: workItems,
 
+    })
+})
 
+// app.post("/work", (res, req) => {
+//     var item = req.body.addItem;
 
+//     workItems.push(item)
 
+//     console.log(item)
 
-
-
-
-
-
-
-
-
-
-
-
-
+//     res.redirect("/work")
+// })
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

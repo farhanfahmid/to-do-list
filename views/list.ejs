@@ -11,7 +11,7 @@
 
     <div class="box" id="heading">
         <h1>
-            <%= day %>
+            <%= listTitle %>
         </h1>
     </div>
 
@@ -31,7 +31,7 @@
 
         <form class="item" action="/" method="post">
             <input type="text" name="addItem" placeholder="What to do?" autocomplete="off">
-            <button type="submit" name="button">+</button>
+            <button type="submit" name="list" value=<%= listTitle %>>+</button>
         </form>
 
     </div>
