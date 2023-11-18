@@ -55,7 +55,7 @@ app.get("/work", (req, res) => {
     })
 })
 
-// app.post("/work", (res, req) => {
+// app.post("/work", (req, res) => {
 //     var item = req.body.addItem;
 
 //     workItems.push(item)
@@ -64,6 +64,11 @@ app.get("/work", (req, res) => {
 
 //     res.redirect("/work")
 // })
+
+
+app.get("/about", (req, res) => {
+    res.render('about')
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

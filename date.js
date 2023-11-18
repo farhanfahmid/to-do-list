@@ -11,7 +11,7 @@ function getDate() {
         year: "numeric"
     }
 
-    var day = today.toLocaleDateString("en-US", options)
+    return today.toLocaleDateString("en-US", options)
 
-    return day
+    
 }
