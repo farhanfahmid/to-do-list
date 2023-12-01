@@ -22,7 +22,7 @@ app.use(express.static('public'))
 
 
 //create mongoose database
-mongoose.connect("mongodb://localhost:27017/todolistDB")
+mongoose.connect("mongodb+srv://admin-farhan:theblacklist@cluster0.vrrapnn.mongodb.net/todolistDB")
 
 
 //create schema for the database
