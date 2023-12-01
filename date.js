@@ -6,12 +6,11 @@ function getDate() {
 
     var options = {
         weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
+        // day: "numeric",
+        // month: "long",
+        // year: "numeric"
     }
 
     return today.toLocaleDateString("en-US", options)
 
-    
 }

@@ -9,17 +9,27 @@
     </div>
 
     <div class="box">
-        <% for(var i=0; i<items.length; i++){ %>
 
-        <div class="item">  
+        <!-- tap into items array, get access to each item, which is a document, and display name only -->
+       <% items.forEach(function(item){ %>
 
-            <input type="checkbox" id="">
+            <form action="/delete" method="post">
+                <div class="item">  
 
-            <p><%= items[i] %></p>
+                    <input name="checkbx" type="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+                    <!-- the job of value="<%=item._id%>" is to get the mongodb-generated id of the item that is being checked off, so we can delete the document with that id -->
+
+                    <p><%= item.name %></p>
+                    
+                </div>
+                <input type="hidden" name="hiddenListName" value="<%=listTitle%>"></input>
+            </form>
             
-        </div>
+        <% }) %>
 
-        <% } %>
+
+
+  
 
 
         <form class="item" action="/" method="post">
