@@ -1,0 +1,23 @@
+.then((foundList)=>{
+                console.log("Successfull pulling " + hiddenListName)
+                
+                foundList.save();
+                // res.redirect("/" + hiddenListName)
+                List.deleteOne({ _id:  checkedItemID})
+                    .then(() => {
+                        console.log("Successfully deleted from custom list")
+                        // res.redirect("/")
+                        res.render("list.ejs", {
+                            listTitle: hiddenListName,
+                            items: foundList.items
+                    })
+                    .catch((error) => {
+                        console.log("Error deleting item from custom list")
+                    })
+                    
+                    })
+                })
+            .catch((error) => {
+                console.log("Error deleting item from custom list")
+            })
+    }

@@ -47,6 +47,8 @@ const item2 = new Item({
 //create an array of default items
 const defaultItems = [item1, item2]
 
+
+
 const day = date()
 
 // var items = [];
@@ -116,15 +118,19 @@ app.post("/", (req, res) => {
             .then((foundList) => {
                 foundList.items.push(item) //tap into the items of the custom list and push in the new item given by the user
                 foundList.save();
-                res.redirect("/" + listName) //redirect to the page rendering the custom list
+                //res.redirect("/createCustomList") //redirect to the page rendering the custom list
+                res.render("list.ejs", {
+                    listTitle: listName,
+                    items: foundList.items
+                })
             })
             .catch((error) => {
-                console.log("Error")
+                console.log("Error adding item to custom list")
             })
     }
 
     console.log(listName)
-    console.log(day)
+    
 
 })
 
@@ -137,14 +143,16 @@ app.post("/delete", (req, res) => {
 
     const hiddenListName = req.body.hiddenListName;
 
+ 
+
     if(hiddenListName == day) {
         Item.deleteOne({ _id:  checkedItemID})
         .then(() => {
-            console.log("Successfully deleted")
+            console.log("Successfully deleted item from default list")
             res.redirect("/")
         })
         .catch((error) => {
-            console.log("Error")
+            console.log("Error deleting item from default list")
         })
     }
     else{
@@ -155,17 +163,37 @@ app.post("/delete", (req, res) => {
             {
                 $pull: { items: {_id: checkedItemID} } //pull the document with _id: checkedItemID from the array called "items"
             },
+            { new: true }
         )
-            .then(()=>{
-                console.log("Successfull pulling " + hiddenListName)
-                res.redirect("/" + hiddenListName)
-            })
-            .catch((error) => {
-                console.log("Error")
-            })
-    }
+        
+
+        .then((foundList) => {
+            console.log("Successfull pulling " + hiddenListName)
+
+         
+
+            List.findByIdAndDelete(checkedItemID)
+            
+                .then(() => {
+                   
+                    res.render("list.ejs", {
+                        listTitle: hiddenListName,
+                        items: foundList.items //the problem is, this foundList is not getting updated the first time a custom list item is being checked off, so we are having to check the box twice to delete a custom item from a custom list
+                    })
+                })
+
+                .catch((error) => {
+                    console.log("Error deleting item from custom list")
+                })
+
+        })
+
+        .catch((error) => {
+            console.log("Error updating list", error);
+        });
+            
    
-})
+}})
 
 
 
@@ -180,11 +208,9 @@ const List = mongoose.model("List", listSchema)
 
 
 //defining new dynamic routes
-app.get("/:customListName", (req, res) => {
+app.post("/createCustomList", (req, res) => {
 
-    console.log(req.params.customListName)
-
-    const customListName = _.capitalize(req.params.customListName)
+    const customListName = _.capitalize(req.body.addItem1)
 
     //first check if a custom list by that same name already exists
     List.findOne({name: customListName})
@@ -204,10 +230,17 @@ app.get("/:customListName", (req, res) => {
             })
 
             list.save();
-            res.redirect("/" + customListName)
+
+            res.render("list.ejs", {
+                listTitle: customListName,
+                items: defaultItems
+            })
+            // res.redirect("/CustomList")
+            console.log(customListName)
         })
 
 })
+
 
 
 app.get("/about", (req, res) => {

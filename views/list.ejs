@@ -28,15 +28,21 @@
         <% }) %>
 
 
-
-  
-
-
         <form class="item" action="/" method="post">
             <input type="text" name="addItem" placeholder="What to do?" autocomplete="off">
-            <button type="submit" name="list" value=<%= listTitle %>>+</button>
+            <button class="addbutton" type="submit" name="list" value="<%=listTitle%>">+</button>
         </form>
 
+    </div>
+
+
+    <div class="box">
+        <form class="item" action="/createCustomList" method="post">
+            <input type="text" name="addItem1" placeholder="Type title of your own new list" autocomplete="off">
+            <button class="gobutton" type="submit" name="list" value=<%= listTitle %>>Go</button>
+            
+            
+        </form>
     </div>
      
 
