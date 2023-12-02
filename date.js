@@ -1,8 +1,13 @@
 
 module.exports = getDate
+const moment = require('moment-timezone');
 
 function getDate() {
-    var today = new Date();
+
+    // Set the timezone
+    const timezone = 'Asia/Dhaka';
+    const today = moment().tz(timezone).format('dddd');
+    // var today = new Date();
 
     var options = {
         weekday: "long",
@@ -11,6 +16,6 @@ function getDate() {
         // year: "numeric"
     }
 
-    return today.toLocaleDateString("en-US", options)
+    return today
 
 }

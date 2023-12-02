@@ -49,7 +49,7 @@ const defaultItems = [item1, item2]
 
 
 
-const day = date()
+var day = date()
 
 // var items = [];
 // var workItems = [];
