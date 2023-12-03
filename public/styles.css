@@ -116,7 +116,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10rem;
+    /* margin-bottom: 10rem; */
     text-align: center;
   }
 
@@ -128,10 +128,34 @@ body {
     --bs-btn-hover-border-color: #3D30A2;
     --bs-btn-active-bg: #190482;
     --bs-btn-active-border-color: #190482;
+    
 
   }
 
+
+
+  #pen{
+    background-color: #A683E3;
+  }
+
+  @media only screen and (max-width: 420px){
+    #pen{
+      background-color: #E4E9FD;
+    }
+  }
+
+  #journal{
+    background-color: #A683E3;
+  }
+
+  #bookmark{
+    background-color: #A683E3;
+  }
   
+  footer{
+    margin-bottom: 60px;
+  }
  
+
   
  
