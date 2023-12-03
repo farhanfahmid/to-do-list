@@ -74,7 +74,7 @@ body {
   button.gobutton {
     min-height: 50px;
     width: 50px;
-    /* border-radius: 50%; */
+    border-radius: 50%;
     border-color: transparent;
     background-color: #A683E3;
     color: #fff;
@@ -82,6 +82,8 @@ body {
     padding-bottom: 6px;
     border-width: 0;
   }
+
+  
   
   input[type="text"] {
     text-align: center;
@@ -109,3 +111,27 @@ body {
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
   }
+
+  .homebutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10rem;
+    text-align: center;
+  }
+
+  .btn-primary{
+    background-color: #F1EAFF;
+    color: rgba(0, 0, 0, 0.69);
+    border-color: #3D30A2;
+    --bs-btn-hover-bg: #3D30A2;
+    --bs-btn-hover-border-color: #3D30A2;
+    --bs-btn-active-bg: #190482;
+    --bs-btn-active-border-color: #190482;
+
+  }
+
+  
+ 
+  
+ 
